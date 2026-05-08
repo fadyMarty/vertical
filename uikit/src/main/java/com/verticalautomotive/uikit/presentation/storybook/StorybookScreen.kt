@@ -1,4 +1,4 @@
-package com.verticalautomotive.android.presentation.storybook
+package com.verticalautomotive.uikit.presentation.storybook
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,25 +13,32 @@ import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.verticalautomotive.uikit.R
+import com.verticalautomotive.uikit.presentation.components.bottom_bar.BottomBar
+import com.verticalautomotive.uikit.presentation.components.bottom_bar.BottomBarItem
 import com.verticalautomotive.uikit.presentation.components.buttons.VerticalButton
 import com.verticalautomotive.uikit.presentation.components.buttons.VerticalIconButton
 import com.verticalautomotive.uikit.presentation.components.buttons.VerticalTextButton
-import com.verticalautomotive.uikit.presentation.components.indicators.StatusBar
+import com.verticalautomotive.uikit.presentation.components.indicator.StatusBar
 import com.verticalautomotive.uikit.presentation.components.inputs.Input
 import com.verticalautomotive.uikit.presentation.components.inputs.PasswordInput
 import com.verticalautomotive.uikit.presentation.components.inputs.transformations.PhoneNumberInputTransformation
 import com.verticalautomotive.uikit.presentation.components.inputs.transformations.PhoneNumberOutputTransformation
+import com.verticalautomotive.uikit.presentation.components.toolbar.HomeToolbar
+import com.verticalautomotive.uikit.presentation.components.toolbar.Toolbar
+import com.verticalautomotive.uikit.presentation.navigation.Route
 
 @Composable
 fun StorybookScreen() {
     Scaffold(
-        contentWindowInsets = WindowInsets.safeDrawing
+        contentWindowInsets = WindowInsets.safeDrawing,
+        containerColor = Color(0xFFE0E0E0).copy(alpha = 0.81f)
     ) { innerPadding ->
         LazyColumn(
             modifier = Modifier
@@ -134,6 +141,84 @@ fun StorybookScreen() {
                     onToggleVisibilityClick = {}
                 )
             }
+            item {
+                BottomBar(
+                    items = getBottomBarItems(0),
+                    onItemClick = {}
+                )
+            }
+            item {
+                BottomBar(
+                    items = getBottomBarItems(1),
+                    onItemClick = {}
+                )
+            }
+            item {
+                BottomBar(
+                    items = getBottomBarItems(2),
+                    onItemClick = {}
+                )
+            }
+            item {
+                BottomBar(
+                    items = getBottomBarItems(3),
+                    onItemClick = {}
+                )
+            }
+            item {
+                Toolbar(
+                    onBackClick = {},
+                    title = "Promotions"
+                )
+            }
+            item {
+                Toolbar(
+                    onBackClick = {}
+                )
+            }
+            item {
+                HomeToolbar(
+                    onUserClick = {},
+                    onNotificationClick = {},
+                    title = "Hello, Michael"
+                )
+            }
         }
+    }
+}
+
+@Composable
+private fun getBottomBarItems(
+    selectedItemIndex: Int,
+): List<BottomBarItem<Route>> {
+    return listOf(
+        BottomBarItem(
+            selected = false,
+            icon = ImageVector.vectorResource(R.drawable.ic_home),
+            label = "Home",
+            route = Route.Home
+        ),
+        BottomBarItem(
+            selected = false,
+            icon = ImageVector.vectorResource(R.drawable.ic_3dcube),
+            label = "Services",
+            route = Route.Services
+        ),
+        BottomBarItem(
+            selected = false,
+            icon = ImageVector.vectorResource(R.drawable.ic_car),
+            label = "Garage",
+            route = Route.Garage
+        ),
+        BottomBarItem(
+            selected = false,
+            icon = ImageVector.vectorResource(R.drawable.ic_message),
+            label = "Chat",
+            route = Route.Chat
+        )
+    ).mapIndexed { index, item ->
+        item.copy(
+            selected = index == selectedItemIndex
+        )
     }
 }

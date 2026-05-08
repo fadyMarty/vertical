@@ -1,4 +1,4 @@
-package com.verticalautomotive.uikit.presentation.components.indicators
+package com.verticalautomotive.uikit.presentation.components.indicator
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -40,7 +40,7 @@ fun StatusBar(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun StatusBarPreview() {
     VerticalTheme {

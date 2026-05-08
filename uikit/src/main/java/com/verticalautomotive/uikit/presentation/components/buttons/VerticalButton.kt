@@ -86,7 +86,7 @@ fun VerticalButton(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun VerticalButtonPreview() {
     VerticalTheme {

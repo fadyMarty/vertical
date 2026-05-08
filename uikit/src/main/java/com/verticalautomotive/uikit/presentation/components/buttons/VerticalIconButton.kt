@@ -1,5 +1,6 @@
 package com.verticalautomotive.uikit.presentation.components.buttons
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -10,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,6 +24,8 @@ fun VerticalIconButton(
     icon: ImageVector,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    containerColor: Color? = null,
+    contentColor: Color = VerticalTheme.colorScheme.onBackground,
 ) {
     Box(
         modifier = modifier
@@ -32,6 +36,11 @@ fun VerticalIconButton(
                 shape = CircleShape
             )
             .clip(CircleShape)
+            .then(
+                if (containerColor != null) {
+                    Modifier.background(containerColor)
+                } else Modifier
+            )
             .clickable(onClick = onClick),
         contentAlignment = Alignment.Center
     ) {
@@ -39,12 +48,12 @@ fun VerticalIconButton(
             modifier = Modifier.size(24.dp),
             imageVector = icon,
             contentDescription = null,
-            tint = VerticalTheme.colorScheme.onBackground
+            tint = contentColor
         )
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun VerticalIconButtonPreview() {
     VerticalTheme {
