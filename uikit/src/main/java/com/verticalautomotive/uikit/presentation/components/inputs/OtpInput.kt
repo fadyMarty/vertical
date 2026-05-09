@@ -1,4 +1,4 @@
-package com.verticalautomotive.android.presentation.phone_login.components
+package com.verticalautomotive.uikit.presentation.components.inputs
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

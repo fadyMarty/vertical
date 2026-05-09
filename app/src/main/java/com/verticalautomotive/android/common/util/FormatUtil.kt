@@ -5,7 +5,16 @@ import java.util.Locale
 object FormatUtil {
 
     fun formatPhoneNumber(phoneNumber: String): String {
-        return "+${phoneNumber.first()} (${phoneNumber.substring(1, 4)}) ${phoneNumber.substring(4, 7)}-${phoneNumber.substring(7, 11)}"
+        return buildString {
+            append('+')
+            append(phoneNumber, 0, 1)
+            append(" (")
+            append(phoneNumber, 1, 4)
+            append(") ")
+            append(phoneNumber, 4, 7)
+            append('-')
+            append(phoneNumber, 7, 11)
+        }
     }
 
     fun formatDuration(seconds: Int): String {

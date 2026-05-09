@@ -2,9 +2,14 @@ package com.verticalautomotive.uikit.presentation.components.toolbar
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,16 +33,19 @@ fun Toolbar(
     modifier: Modifier = Modifier,
     title: String? = null,
     leadingIcon: (@Composable () -> Unit)? = null,
+    windowInsets: WindowInsets = WindowInsets.statusBars.union(
+        WindowInsets.displayCutout
+    ),
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .windowInsetsPadding(windowInsets)
             .padding(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(24.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         VerticalIconButton(
-            modifier = modifier,
             icon = ImageVector.vectorResource(R.drawable.ic_arrow_left),
             onClick = onBackClick,
             containerColor = VerticalTheme.colorScheme.background

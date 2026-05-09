@@ -11,10 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.union
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -67,7 +65,7 @@ fun PhoneLoginRoot(
 }
 
 @Composable
-private fun PhoneLoginScreen(
+fun PhoneLoginScreen(
     state: PhoneLoginState,
     onEvent: (PhoneLoginEvent) -> Unit,
 ) {
@@ -83,9 +81,7 @@ private fun PhoneLoginScreen(
         topBar = {
             Toolbar(
                 modifier = Modifier
-                    .windowInsetsPadding(
-                        WindowInsets.statusBars.union(WindowInsets.displayCutout)
-                    )
+                    .fillMaxWidth()
                     .padding(top = 16.dp),
                 onBackClick = {
                     onEvent(PhoneLoginEvent.OnBackClick)

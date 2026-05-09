@@ -27,13 +27,13 @@ class PhoneLoginViewModel : ViewModel() {
     private var resendTimerJob: Job? = null
 
     private val isPhoneNumberValidFlow = snapshotFlow {
-        _state.value.phoneNumberState.text.toString()
+        state.value.phoneNumberState.text.toString()
     }.map { phoneNumber ->
         phoneNumber.length == 11
     }.distinctUntilChanged()
 
     private val isConfirmationCodeValid = snapshotFlow {
-        _state.value.confirmationCodeState.text.toString()
+        state.value.confirmationCodeState.text.toString()
     }.map { confirmationCode ->
         confirmationCode.length == 6
     }.distinctUntilChanged()
@@ -79,7 +79,7 @@ class PhoneLoginViewModel : ViewModel() {
                     resendCountdownSeconds = 239
                 )
             }
-            while (_state.value.resendCountdownSeconds > 0) {
+            while (state.value.resendCountdownSeconds > 0) {
                 delay(1000L)
                 _state.update {
                     it.copy(

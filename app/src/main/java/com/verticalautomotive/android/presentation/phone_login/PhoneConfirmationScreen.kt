@@ -3,15 +3,10 @@ package com.verticalautomotive.android.presentation.phone_login
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.union
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,7 +19,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.verticalautomotive.android.common.util.FormatUtil
-import com.verticalautomotive.android.presentation.phone_login.components.OtpCodeInput
+import com.verticalautomotive.uikit.presentation.components.inputs.OtpCodeInput
 import com.verticalautomotive.uikit.common.theme.VerticalTheme
 import com.verticalautomotive.uikit.presentation.components.buttons.VerticalButton
 import com.verticalautomotive.uikit.presentation.components.buttons.VerticalTextButton
@@ -52,7 +47,7 @@ fun PhoneConfirmationRoot(
 }
 
 @Composable
-private fun PhoneConfirmationScreen(
+fun PhoneConfirmationScreen(
     state: PhoneLoginState,
     onEvent: (PhoneLoginEvent) -> Unit,
 ) {
@@ -60,9 +55,7 @@ private fun PhoneConfirmationScreen(
         topBar = {
             Toolbar(
                 modifier = Modifier
-                    .windowInsetsPadding(
-                        WindowInsets.statusBars.union(WindowInsets.displayCutout)
-                    )
+                    .fillMaxWidth()
                     .padding(top = 16.dp),
                 onBackClick = {
                     onEvent(PhoneLoginEvent.OnBackClick)

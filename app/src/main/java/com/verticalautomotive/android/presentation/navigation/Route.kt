@@ -23,13 +23,19 @@ sealed interface Route {
     data object EmailLogin : Route
 
     @Serializable
+    data object HomeGraph : Route
+
+    @Serializable
     data object Home : Route
 
     @Serializable
-    data object MainGraph : Route
+    data object Services : Route
 
     @Serializable
     data object Garage : Route
+
+    @Serializable
+    data object Chat : Route
 
     @Serializable
     data object PromotionList : Route

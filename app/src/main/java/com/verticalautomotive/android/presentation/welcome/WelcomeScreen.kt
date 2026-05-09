@@ -45,7 +45,7 @@ fun WelcomeRoot(
 }
 
 @Composable
-private fun WelcomeScreen(
+fun WelcomeScreen(
     onEvent: (WelcomeEvent) -> Unit,
 ) {
     Scaffold { innerPadding ->
