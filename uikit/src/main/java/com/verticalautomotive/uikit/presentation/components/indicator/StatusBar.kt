@@ -1,5 +1,6 @@
 package com.verticalautomotive.uikit.presentation.components.indicator
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,17 +26,19 @@ fun StatusBar(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         repeat(pageCount) { index ->
+            val color by animateColorAsState(
+                targetValue = if (index == currentPage) {
+                    VerticalTheme.colorScheme.onBackground
+                } else {
+                    VerticalTheme.colorScheme.strokeGrey
+                }
+            )
+
             Box(
                 modifier = Modifier
                     .size(12.dp)
                     .clip(CircleShape)
-                    .background(
-                        color = if (index == currentPage) {
-                            VerticalTheme.colorScheme.onBackground
-                        } else {
-                            VerticalTheme.colorScheme.strokeGrey
-                        }
-                    )
+                    .background(color)
             )
         }
     }

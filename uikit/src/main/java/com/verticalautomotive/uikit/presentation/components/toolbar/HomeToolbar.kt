@@ -2,8 +2,13 @@ package com.verticalautomotive.uikit.presentation.components.toolbar
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.union
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -13,7 +18,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.verticalautomotive.uikit.R
@@ -23,20 +27,23 @@ import com.verticalautomotive.uikit.presentation.components.buttons.VerticalIcon
 
 @Composable
 fun HomeToolbar(
+    title: String,
     onUserClick: () -> Unit,
     onNotificationClick: () -> Unit,
     modifier: Modifier = Modifier,
-    title: String,
+    windowInsets: WindowInsets = WindowInsets.statusBars.union(
+        WindowInsets.displayCutout
+    ),
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .windowInsetsPadding(windowInsets)
             .padding(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(24.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         VerticalIconButton(
-            modifier = modifier,
             icon = ImageVector.vectorResource(R.drawable.ic_user),
             onClick = onUserClick,
             containerColor = VerticalTheme.colorScheme.onBackground,
@@ -53,11 +60,9 @@ fun HomeToolbar(
                 letterSpacing = 0.sp,
                 textAlign = TextAlign.Center,
                 color = VerticalTheme.colorScheme.background
-            ),
-            overflow = TextOverflow.Ellipsis
+            )
         )
         VerticalIconButton(
-            modifier = modifier,
             icon = ImageVector.vectorResource(R.drawable.ic_notification),
             onClick = onNotificationClick,
             containerColor = VerticalTheme.colorScheme.onBackground,

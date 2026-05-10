@@ -1,10 +1,10 @@
 package com.verticalautomotive.uikit.presentation.components.bottom_bar
 
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.annotation.DrawableRes
 
 data class BottomBarItem<out T>(
     val selected: Boolean,
-    val icon: ImageVector,
+    @DrawableRes val icon: Int,
     val label: String,
     val route: T,
 )

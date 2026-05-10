@@ -1,5 +1,6 @@
 package com.verticalautomotive.uikit.presentation.components.inputs
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -17,10 +18,12 @@ import androidx.compose.foundation.text.input.maxLength
 import androidx.compose.foundation.text.input.then
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.contentType
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
@@ -39,6 +42,14 @@ fun OtpCodeInput(
     isOtpCodeValid: Boolean,
     modifier: Modifier = Modifier,
 ) {
+    val borderColor by animateColorAsState(
+        targetValue = if (isOtpCodeValid) {
+            VerticalTheme.colorScheme.onBackground
+        } else {
+            VerticalTheme.colorScheme.strokeGrey
+        }
+    )
+
     BasicTextField(
         modifier = modifier.semantics {
             contentType = ContentType.SmsOtpCode
@@ -63,7 +74,7 @@ fun OtpCodeInput(
                 repeat(6) { index ->
                     OtpDigit(
                         number = otpCode.getOrElse(index) { ' ' },
-                        isOtpCodeValid = isOtpCodeValid
+                        borderColor = borderColor
                     )
                 }
             }
@@ -74,7 +85,7 @@ fun OtpCodeInput(
 @Composable
 private fun OtpDigit(
     number: Char,
-    isOtpCodeValid: Boolean,
+    borderColor: Color,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -82,9 +93,7 @@ private fun OtpDigit(
             .size(48.dp)
             .border(
                 width = 1.dp,
-                color = if (isOtpCodeValid) {
-                    VerticalTheme.colorScheme.onBackground
-                } else VerticalTheme.colorScheme.strokeGrey,
+                color = borderColor,
                 shape = CircleShape
             )
             .clip(CircleShape)

@@ -7,8 +7,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -16,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.verticalautomotive.android.presentation.home.HomeRoot
 import com.verticalautomotive.uikit.R
 import com.verticalautomotive.uikit.presentation.components.bottom_bar.BottomBar
 import com.verticalautomotive.uikit.presentation.components.bottom_bar.BottomBarItem
@@ -36,7 +35,7 @@ fun HomeGraph() {
                             route = Route.Home,
                             currentDestination = currentDestination
                         ),
-                        icon = ImageVector.vectorResource(R.drawable.ic_home),
+                        icon = R.drawable.ic_home,
                         label = "Home",
                         route = Route.Home
                     ),
@@ -45,7 +44,7 @@ fun HomeGraph() {
                             route = Route.Services,
                             currentDestination = currentDestination
                         ),
-                        icon = ImageVector.vectorResource(R.drawable.ic_3dcube),
+                        icon = R.drawable.ic_3dcube,
                         label = "Services",
                         route = Route.Services
                     ),
@@ -54,7 +53,7 @@ fun HomeGraph() {
                             route = Route.Garage,
                             currentDestination = currentDestination
                         ),
-                        icon = ImageVector.vectorResource(R.drawable.ic_car),
+                        icon = R.drawable.ic_car,
                         label = "Garage",
                         route = Route.Garage
                     ),
@@ -63,7 +62,7 @@ fun HomeGraph() {
                             route = Route.Chat,
                             currentDestination = currentDestination
                         ),
-                        icon = ImageVector.vectorResource(R.drawable.ic_message),
+                        icon = R.drawable.ic_message,
                         label = "Chat",
                         route = Route.Chat
                     )
@@ -86,7 +85,7 @@ fun HomeGraph() {
             startDestination = Route.Home
         ) {
             composable<Route.Home> {
-
+                HomeRoot()
             }
             composable<Route.Services> {
 

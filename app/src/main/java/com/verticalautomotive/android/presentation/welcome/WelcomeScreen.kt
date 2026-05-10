@@ -54,7 +54,7 @@ fun WelcomeScreen(
         ) {
             Image(
                 modifier = Modifier.fillMaxWidth(),
-                painter = painterResource(R.drawable.img_welcome),
+                painter = painterResource(R.drawable.img_welcome_background),
                 contentDescription = null,
                 contentScale = ContentScale.FillWidth
             )

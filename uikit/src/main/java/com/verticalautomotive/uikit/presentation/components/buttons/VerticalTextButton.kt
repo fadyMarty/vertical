@@ -1,9 +1,11 @@
 package com.verticalautomotive.uikit.presentation.components.buttons
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.style.TextAlign
@@ -18,9 +20,13 @@ fun VerticalTextButton(
     enabled: Boolean = true,
     textAlign: TextAlign = TextAlign.Center,
 ) {
+    val alpha by animateFloatAsState(
+        targetValue = if (enabled) 1f else 0.2f
+    )
+
     Text(
         modifier = modifier
-            .alpha(alpha = if (enabled) 1f else 0.2f)
+            .alpha(alpha)
             .clickable(
                 interactionSource = null,
                 indication = null,

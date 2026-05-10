@@ -19,7 +19,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.verticalautomotive.uikit.R
@@ -71,8 +70,7 @@ fun Toolbar(
                         lineHeight = 25.sp,
                         letterSpacing = 0.sp,
                         textAlign = TextAlign.Center
-                    ),
-                    overflow = TextOverflow.Ellipsis
+                    )
                 )
             }
         }

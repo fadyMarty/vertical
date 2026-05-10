@@ -1,5 +1,6 @@
 package com.verticalautomotive.uikit.presentation.components.bottom_bar
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,6 +19,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
@@ -26,13 +28,10 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.verticalautomotive.uikit.R
 import com.verticalautomotive.uikit.common.theme.Gilroy
 import com.verticalautomotive.uikit.common.theme.VerticalTheme
-import com.verticalautomotive.uikit.presentation.navigation.Route
 
 @Composable
 fun <T> BottomBar(
@@ -54,6 +53,14 @@ fun <T> BottomBar(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         items.forEach { item ->
+            val contentColor by animateColorAsState(
+                targetValue = if (item.selected) {
+                    VerticalTheme.colorScheme.mainButton
+                } else {
+                    VerticalTheme.colorScheme.background
+                }
+            )
+
             Column(
                 modifier = Modifier
                     .clickable(
@@ -72,13 +79,9 @@ fun <T> BottomBar(
             ) {
                 Icon(
                     modifier = Modifier.size(24.dp),
-                    imageVector = item.icon,
+                    imageVector = ImageVector.vectorResource(item.icon),
                     contentDescription = null,
-                    tint = if (item.selected) {
-                        VerticalTheme.colorScheme.mainButton
-                    } else {
-                        VerticalTheme.colorScheme.background
-                    }
+                    tint = contentColor
                 )
                 Text(
                     modifier = Modifier.width(72.dp),
@@ -90,50 +93,10 @@ fun <T> BottomBar(
                         lineHeight = 16.sp,
                         letterSpacing = 0.3.sp,
                         textAlign = TextAlign.Center,
-                        color = if (item.selected) {
-                            VerticalTheme.colorScheme.mainButton
-                        } else {
-                            VerticalTheme.colorScheme.background
-                        }
+                        color = contentColor
                     )
                 )
             }
         }
-    }
-}
-
-@Preview
-@Composable
-private fun BottomBarPreview() {
-    VerticalTheme {
-        BottomBar(
-            items = listOf(
-                BottomBarItem(
-                    selected = false,
-                    icon = ImageVector.vectorResource(R.drawable.ic_home),
-                    label = "Home",
-                    route = Route.Home
-                ),
-                BottomBarItem(
-                    selected = false,
-                    icon = ImageVector.vectorResource(R.drawable.ic_3dcube),
-                    label = "Services",
-                    route = Route.Services
-                ),
-                BottomBarItem(
-                    selected = false,
-                    icon = ImageVector.vectorResource(R.drawable.ic_car),
-                    label = "Garage",
-                    route = Route.Garage
-                ),
-                BottomBarItem(
-                    selected = false,
-                    icon = ImageVector.vectorResource(R.drawable.ic_message),
-                    label = "Chat",
-                    route = Route.Chat
-                )
-            ),
-            onItemClick = {}
-        )
     }
 }

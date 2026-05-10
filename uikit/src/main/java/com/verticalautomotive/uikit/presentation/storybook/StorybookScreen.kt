@@ -194,25 +194,25 @@ private fun getBottomBarItems(
     return listOf(
         BottomBarItem(
             selected = false,
-            icon = ImageVector.vectorResource(R.drawable.ic_home),
+            icon = R.drawable.ic_home,
             label = "Home",
             route = Route.Home
         ),
         BottomBarItem(
             selected = false,
-            icon = ImageVector.vectorResource(R.drawable.ic_3dcube),
+            icon = R.drawable.ic_3dcube,
             label = "Services",
             route = Route.Services
         ),
         BottomBarItem(
             selected = false,
-            icon = ImageVector.vectorResource(R.drawable.ic_car),
+            icon = R.drawable.ic_car,
             label = "Garage",
             route = Route.Garage
         ),
         BottomBarItem(
             selected = false,
-            icon = ImageVector.vectorResource(R.drawable.ic_message),
+            icon = R.drawable.ic_message,
             label = "Chat",
             route = Route.Chat
         )
