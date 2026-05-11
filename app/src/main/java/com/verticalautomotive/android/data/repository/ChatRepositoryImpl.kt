@@ -18,7 +18,7 @@ class ChatRepositoryImpl : ChatRepository {
             unreadCount = 1
         ),
         Chat(
-            id = 1,
+            id = 2,
             image = R.drawable.img_volkswagen_support,
             title = "Support",
             lastMessageContent = "We are glad to see you here! \uD83C\uDF89 \u2028Need help? We are always here - write to support. We wish you a pleasant use! May each of your orders bring you joy!",
@@ -27,7 +27,7 @@ class ChatRepositoryImpl : ChatRepository {
             unreadCount = 0
         ),
         Chat(
-            id = 1,
+            id = 3,
             image = R.drawable.img_tesla_support,
             title = "Support",
             lastMessageContent = "We are glad to see you here! \uD83C\uDF89 \u2028Need help? We are always here - write to support. We wish you a pleasant use! May each of your orders bring you joy!",

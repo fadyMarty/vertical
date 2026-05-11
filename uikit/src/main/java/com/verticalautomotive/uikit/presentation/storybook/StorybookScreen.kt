@@ -143,25 +143,33 @@ fun StorybookScreen() {
             }
             item {
                 BottomBar(
-                    items = getBottomBarItems(0),
+                    items = getBottomBarItems(
+                        selectedRoute = Route.Home.route
+                    ),
                     onItemClick = {}
                 )
             }
             item {
                 BottomBar(
-                    items = getBottomBarItems(1),
+                    items = getBottomBarItems(
+                        selectedRoute = Route.Services.route
+                    ),
                     onItemClick = {}
                 )
             }
             item {
                 BottomBar(
-                    items = getBottomBarItems(2),
+                    items = getBottomBarItems(
+                        selectedRoute = Route.Garage.route
+                    ),
                     onItemClick = {}
                 )
             }
             item {
                 BottomBar(
-                    items = getBottomBarItems(3),
+                    items = getBottomBarItems(
+                        selectedRoute = Route.Chat.route
+                    ),
                     onItemClick = {}
                 )
             }
@@ -189,36 +197,36 @@ fun StorybookScreen() {
 
 @Composable
 private fun getBottomBarItems(
-    selectedItemIndex: Int,
-): List<BottomBarItem<Route>> {
+    selectedRoute: String,
+): List<BottomBarItem> {
     return listOf(
         BottomBarItem(
             selected = false,
             icon = R.drawable.ic_home,
             label = "Home",
-            route = Route.Home
+            route = Route.Home.route
         ),
         BottomBarItem(
             selected = false,
             icon = R.drawable.ic_3dcube,
             label = "Services",
-            route = Route.Services
+            route = Route.Services.route
         ),
         BottomBarItem(
             selected = false,
             icon = R.drawable.ic_car,
             label = "Garage",
-            route = Route.Garage
+            route = Route.Garage.route
         ),
         BottomBarItem(
             selected = false,
             icon = R.drawable.ic_message,
             label = "Chat",
-            route = Route.Chat
+            route = Route.Chat.route
         )
-    ).mapIndexed { index, item ->
+    ).map { item ->
         item.copy(
-            selected = index == selectedItemIndex
+            selected = item.route == selectedRoute
         )
     }
 }

@@ -1,8 +1,8 @@
 package com.verticalautomotive.uikit.presentation.navigation
 
-internal sealed interface Route {
-    data object Home : Route
-    data object Services : Route
-    data object Garage : Route
-    data object Chat : Route
+sealed class Route(val route: String) {
+    data object Home : Route("home")
+    data object Services : Route("services")
+    data object Garage : Route("garage")
+    data object Chat : Route("chat")
 }

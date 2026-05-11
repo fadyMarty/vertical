@@ -34,9 +34,9 @@ import com.verticalautomotive.uikit.common.theme.Gilroy
 import com.verticalautomotive.uikit.common.theme.VerticalTheme
 
 @Composable
-fun <T> BottomBar(
-    items: List<BottomBarItem<T>>,
-    onItemClick: (BottomBarItem<T>) -> Unit,
+fun BottomBar(
+    items: List<BottomBarItem>,
+    onItemClick: (BottomBarItem) -> Unit,
     modifier: Modifier = Modifier,
     windowInsets: WindowInsets = WindowInsets.navigationBars.union(
         WindowInsets.displayCutout

@@ -1,51 +1,20 @@
 package com.verticalautomotive.android.presentation.navigation
 
-import kotlinx.serialization.Serializable
-
-sealed interface Route {
-
-    @Serializable
-    data object Onboarding : Route
-
-    @Serializable
-    data object AuthGraph : Route
-
-    @Serializable
-    data object Welcome : Route
-
-    @Serializable
-    data object PhoneLoginGraph : Route
-
-    @Serializable
-    data object PhoneLogin : Route
-
-    @Serializable
-    data object PhoneConfirmation : Route
-
-    @Serializable
-    data object EmailLogin : Route
-
-    @Serializable
-    data object HomeGraph : Route
-
-    @Serializable
-    data object Home : Route
-
-    @Serializable
-    data object Services : Route
-
-    @Serializable
-    data object Garage : Route
-
-    @Serializable
-    data object Chat : Route
-
-    @Serializable
-    data object PromotionList : Route
-
-    @Serializable
-    data object ChatList : Route
-
-    @Serializable
-    data class ChatDetail(val id: Int) : Route
+sealed class Route(val route: String) {
+    data object Splash : Route("splash")
+    data object Onboarding : Route("onboarding")
+    data object AuthGraph : Route("auth_graph")
+    data object Welcome : Route("welcome")
+    data object PhoneLoginGraph : Route("phone_login_graph")
+    data object PhoneLogin : Route("phone_login")
+    data object PhoneConfirmation : Route("phone_confirmation")
+    data object EmailLogin : Route("email_login")
+    data object HomeGraph : Route("home_graph")
+    data object Home : Route("home")
+    data object Services : Route("services")
+    data object Garage : Route("garage")
+    data object Chat : Route("chat")
+    data object PromotionList : Route("promotion_list")
+    data object ChatList : Route("chat_list")
+    data object ChatDetail : Route("chat_detail")
 }

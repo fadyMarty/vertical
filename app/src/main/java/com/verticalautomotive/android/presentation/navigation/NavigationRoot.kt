@@ -1,10 +1,14 @@
 package com.verticalautomotive.android.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.verticalautomotive.android.presentation.chat_detail.ChatDetailRoot
 import com.verticalautomotive.android.presentation.onboarding.OnboardingRoot
+import com.verticalautomotive.android.presentation.splash.SplashRoot
 
 @Composable
 fun NavigationRoot() {
@@ -12,13 +16,28 @@ fun NavigationRoot() {
 
     NavHost(
         navController = navController,
-        startDestination = Route.Onboarding
+        startDestination = Route.Splash.route
     ) {
-        composable<Route.Onboarding> {
+        composable(
+            route = Route.Splash.route
+        ) {
+            SplashRoot(
+                onReadOnboardingState = { route ->
+                    navController.navigate(route) {
+                        popUpTo(Route.Splash.route) {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
+        }
+        composable(
+            route = Route.Onboarding.route
+        ) {
             OnboardingRoot(
                 onSkipClick = {
-                    navController.navigate(Route.AuthGraph) {
-                        popUpTo(Route.Onboarding) {
+                    navController.navigate(Route.AuthGraph.route) {
+                        popUpTo(Route.Onboarding.route) {
                             inclusive = true
                         }
                     }
@@ -26,15 +45,26 @@ fun NavigationRoot() {
             )
         }
         authGraph(navController = navController)
-        composable<Route.HomeGraph> {
+        composable(
+            route = Route.HomeGraph.route
+        ) {
             HomeGraph(
-                onChatClick = { id ->
-                    navController.navigate(Route.ChatDetail(id))
+                onChatClick = { chat ->
+                    navController.navigate(Route.ChatDetail.route + "/${chat.id}")
                 }
             )
         }
-        composable<Route.ChatDetail> {
-
+        composable(
+            route = Route.ChatDetail.route + "/{chatId}",
+            arguments = listOf(
+                navArgument(
+                    name = "chatId",
+                ) {
+                    type = NavType.IntType
+                }
+            )
+        ) {
+            ChatDetailRoot()
         }
     }
 }

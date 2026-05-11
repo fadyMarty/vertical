@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.verticalautomotive.android.domain.model.Chat
 import com.verticalautomotive.android.presentation.chat_list.ChatListRoot
 import com.verticalautomotive.android.presentation.home.HomeRoot
 import com.verticalautomotive.uikit.R
@@ -22,7 +23,7 @@ import com.verticalautomotive.uikit.presentation.components.bottom_bar.BottomBar
 
 @Composable
 fun HomeGraph(
-    onChatClick: (Int) -> Unit,
+    onChatClick: (Chat) -> Unit,
 ) {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -34,40 +35,36 @@ fun HomeGraph(
             BottomBar(
                 items = listOf(
                     BottomBarItem(
-                        selected = isRouteSelected(
-                            route = Route.Home,
-                            currentDestination = currentDestination
+                        selected = currentDestination.isSelected(
+                            route = Route.Home.route
                         ),
                         icon = R.drawable.ic_home,
                         label = "Home",
-                        route = Route.Home
+                        route = Route.Home.route
                     ),
                     BottomBarItem(
-                        selected = isRouteSelected(
-                            route = Route.Services,
-                            currentDestination = currentDestination
+                        selected = currentDestination.isSelected(
+                            route = Route.Services.route
                         ),
                         icon = R.drawable.ic_3dcube,
                         label = "Services",
-                        route = Route.Services
+                        route = Route.Services.route
                     ),
                     BottomBarItem(
-                        selected = isRouteSelected(
-                            route = Route.Garage,
-                            currentDestination = currentDestination
+                        selected = currentDestination.isSelected(
+                            route = Route.Garage.route
                         ),
                         icon = R.drawable.ic_car,
                         label = "Garage",
-                        route = Route.Garage
+                        route = Route.Garage.route
                     ),
                     BottomBarItem(
-                        selected = isRouteSelected(
-                            route = Route.Chat,
-                            currentDestination = currentDestination
+                        selected = currentDestination.isSelected(
+                            route = Route.Chat.route
                         ),
                         icon = R.drawable.ic_message,
                         label = "Chat",
-                        route = Route.Chat
+                        route = Route.Chat.route
                     )
                 ),
                 onItemClick = { item ->
@@ -85,18 +82,26 @@ fun HomeGraph(
         NavHost(
             modifier = Modifier.padding(innerPadding),
             navController = navController,
-            startDestination = Route.Home
+            startDestination = Route.Home.route
         ) {
-            composable<Route.Home> {
+            composable(
+                route = Route.Home.route
+            ) {
                 HomeRoot()
             }
-            composable<Route.Services> {
+            composable(
+                route = Route.Services.route
+            ) {
 
             }
-            composable<Route.Garage> {
+            composable(
+                route = Route.Garage.route
+            ) {
 
             }
-            composable<Route.Chat> {
+            composable(
+                route = Route.Chat.route
+            ) {
                 ChatListRoot(
                     onBackClick = {
                         navController.navigateUp()
@@ -108,11 +113,10 @@ fun HomeGraph(
     }
 }
 
-private fun isRouteSelected(
-    route: Route,
-    currentDestination: NavDestination?,
+private fun NavDestination?.isSelected(
+    route: String,
 ): Boolean {
-    return currentDestination?.hierarchy?.any {
-        it.route == route::class.qualifiedName
+    return this?.hierarchy?.any {
+        it.route == route
     } == true
 }

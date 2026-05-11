@@ -29,9 +29,11 @@ import com.verticalautomotive.uikit.presentation.components.buttons.VerticalButt
 import com.verticalautomotive.uikit.presentation.components.buttons.VerticalTextButton
 import com.verticalautomotive.uikit.presentation.components.indicator.StatusBar
 import kotlinx.coroutines.launch
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun OnboardingRoot(
+    viewModel: OnboardingViewModel = koinViewModel(),
     onSkipClick: () -> Unit,
 ) {
     OnboardingScreen(
@@ -39,6 +41,7 @@ fun OnboardingRoot(
             when (event) {
                 OnboardingEvent.OnSkipClick -> onSkipClick()
             }
+            viewModel.onEvent(event)
         }
     )
 }

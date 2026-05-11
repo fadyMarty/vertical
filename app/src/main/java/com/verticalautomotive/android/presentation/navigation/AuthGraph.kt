@@ -13,42 +13,50 @@ import org.koin.compose.viewmodel.sharedKoinViewModel
 fun NavGraphBuilder.authGraph(
     navController: NavHostController,
 ) {
-    navigation<Route.AuthGraph>(
-        startDestination = Route.Welcome
+    navigation(
+        route = Route.AuthGraph.route,
+        startDestination = Route.Welcome.route
     ) {
-        composable<Route.Welcome> {
+        composable(
+            route = Route.Welcome.route
+        ) {
             WelcomeRoot(
                 onPhoneNumberLoginClick = {
-                    navController.navigate(Route.PhoneLoginGraph)
+                    navController.navigate(Route.PhoneLoginGraph.route)
                 },
                 onEmailLoginClick = {
-                    navController.navigate(Route.EmailLogin)
+                    navController.navigate(Route.EmailLogin.route)
                 }
             )
         }
-        navigation<Route.PhoneLoginGraph>(
-            startDestination = Route.PhoneLogin
+        navigation(
+            route = Route.PhoneLoginGraph.route,
+            startDestination = Route.PhoneLogin.route
         ) {
-            composable<Route.PhoneLogin> {
+            composable(
+                route = Route.PhoneLogin.route
+            ) {
                 PhoneLoginRoot(
                     viewModel = it.sharedKoinViewModel(navController),
                     onBackClick = {
                         navController.navigateUp()
                     },
                     onGetCodeClick = {
-                        navController.navigate(Route.PhoneConfirmation)
+                        navController.navigate(Route.PhoneConfirmation.route)
                     }
                 )
             }
-            composable<Route.PhoneConfirmation> {
+            composable(
+                route = Route.PhoneConfirmation.route
+            ) {
                 PhoneConfirmationRoot(
                     viewModel = it.sharedKoinViewModel(navController),
                     onBackClick = {
                         navController.navigateUp()
                     },
                     onLoginClick = {
-                        navController.navigate(Route.HomeGraph) {
-                            popUpTo(Route.AuthGraph) {
+                        navController.navigate(Route.HomeGraph.route) {
+                            popUpTo(Route.AuthGraph.route) {
                                 inclusive = true
                             }
                         }
@@ -56,14 +64,16 @@ fun NavGraphBuilder.authGraph(
                 )
             }
         }
-        composable<Route.EmailLogin> {
+        composable(
+            route = Route.EmailLogin.route
+        ) {
             EmailLoginRoot(
                 onBackClick = {
                     navController.navigateUp()
                 },
                 onLoginClick = {
-                    navController.navigate(Route.HomeGraph) {
-                        popUpTo(Route.AuthGraph) {
+                    navController.navigate(Route.HomeGraph.route) {
+                        popUpTo(Route.AuthGraph.route) {
                             inclusive = true
                         }
                     }

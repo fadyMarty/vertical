@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.verticalautomotive.android.domain.model.Chat
 import com.verticalautomotive.android.presentation.chat_list.components.ChatListItem
 import com.verticalautomotive.uikit.common.theme.VerticalTheme
 import com.verticalautomotive.uikit.presentation.components.toolbar.Toolbar
@@ -25,7 +26,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun ChatListRoot(
     viewModel: ChatListViewModel = koinViewModel(),
     onBackClick: () -> Unit,
-    onChatClick: (Int) -> Unit,
+    onChatClick: (Chat) -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -34,7 +35,7 @@ fun ChatListRoot(
         onEvent = { event ->
             when (event) {
                 ChatListEvent.OnBackClick -> onBackClick()
-                is ChatListEvent.OnChatClick -> onChatClick(event.id)
+                is ChatListEvent.OnChatClick -> onChatClick(event.chat)
             }
         }
     )
@@ -75,7 +76,7 @@ fun ChatListScreen(
                 ChatListItem(
                     chat = chat,
                     onClick = {
-                        onEvent(ChatListEvent.OnChatClick(chat.id))
+                        onEvent(ChatListEvent.OnChatClick(chat))
                     }
                 )
             }
