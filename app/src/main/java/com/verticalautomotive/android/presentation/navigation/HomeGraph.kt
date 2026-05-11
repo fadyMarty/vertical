@@ -14,13 +14,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.verticalautomotive.android.presentation.chat_list.ChatListRoot
 import com.verticalautomotive.android.presentation.home.HomeRoot
 import com.verticalautomotive.uikit.R
 import com.verticalautomotive.uikit.presentation.components.bottom_bar.BottomBar
 import com.verticalautomotive.uikit.presentation.components.bottom_bar.BottomBarItem
 
 @Composable
-fun HomeGraph() {
+fun HomeGraph(
+    onChatClick: (Int) -> Unit,
+) {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
@@ -94,7 +97,12 @@ fun HomeGraph() {
 
             }
             composable<Route.Chat> {
-
+                ChatListRoot(
+                    onBackClick = {
+                        navController.navigateUp()
+                    },
+                    onChatClick = onChatClick
+                )
             }
         }
     }

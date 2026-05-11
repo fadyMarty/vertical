@@ -27,7 +27,14 @@ fun NavigationRoot() {
         }
         authGraph(navController = navController)
         composable<Route.HomeGraph> {
-            HomeGraph()
+            HomeGraph(
+                onChatClick = { id ->
+                    navController.navigate(Route.ChatDetail(id))
+                }
+            )
+        }
+        composable<Route.ChatDetail> {
+
         }
     }
 }

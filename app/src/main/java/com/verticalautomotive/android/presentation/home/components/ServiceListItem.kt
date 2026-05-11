@@ -111,7 +111,7 @@ fun ServiceListItem(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun ServiceListItemPreview() {
     VerticalTheme {
